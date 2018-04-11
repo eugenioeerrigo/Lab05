@@ -37,7 +37,7 @@ public class AnagrammiController {
     void handleCalcola(ActionEvent event) {
     	txtCorr.clear();
     	txtErr.clear();
-    	for(Anagramma a : model.getAnagrammi(txtLog.getText()))
+    	for(Anagramma a : model.getAnagrammi(txtLog.getText())) 
     		txtCorr.appendText(a.toString());
     }
 

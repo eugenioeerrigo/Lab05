@@ -19,7 +19,7 @@ public class Anagramma {
 		String res = "";
 		for(char c: lettere)
 			res += c;
-		return res+"\n";
+		return res;
 	}
 
 	public List<Character> getLettere() {

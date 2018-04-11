@@ -12,13 +12,13 @@ public class Model {
 		soluzione = new ArrayList<>();
 		
 		Anagramma a = new Anagramma();
-		//List<Character> lettere = new ArrayList<>();
 		for(int i=0; i<parola.length(); i++) {
 			a.add(parola.charAt(i));
-			//lettere.add(parola.charAt(i));
+			
 		}
 		
 		Anagramma a1 = new Anagramma();
+		
 		this.ricorsiva(a, a1, livello);
 		
 		return soluzione;
@@ -37,12 +37,6 @@ public class Model {
 		
 	}
 
-	
-	
-
-
-	
-	
 	
 
 }
