@@ -11,11 +11,7 @@ public class Model {
 		int livello = 0;
 		soluzione = new ArrayList<>();
 		
-		Anagramma a = new Anagramma();
-		for(int i=0; i<parola.length(); i++) {
-			a.add(parola.charAt(i));
-			
-		}
+		Anagramma a = new Anagramma(parola);
 		
 		Anagramma a1 = new Anagramma();
 		
@@ -26,17 +22,25 @@ public class Model {
 
 	private void ricorsiva(Anagramma a, Anagramma a1, int livello) {
 		
+		//System.out.println(a1.toString());
+		
 		if(livello==a.getLettere().size()) {
-			soluzione.add(a1);
+			
+			soluzione.add(new Anagramma(a1));                    //deep-copy
+
 			return;
 		}
 	
-		a1.add(a.get(livello));
-		ricorsiva(a, a1, livello+1);
-		a1.removeLast();
+		for(int i=0; i<a.getLettere().size(); i++) {
+			if(!a1.getLettere().contains(a.get(i))) {
+			a1.add(a.get(i)); 
+			ricorsiva(a, a1, livello+1);
+			a1.removeLast();
+			}
+		}
 		
 	}
-
 	
 
+	
 }

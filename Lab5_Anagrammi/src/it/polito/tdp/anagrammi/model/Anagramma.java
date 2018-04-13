@@ -7,9 +7,20 @@ public class Anagramma {
 	private List<Character> lettere;
 	
 	public Anagramma() {
-		lettere = new LinkedList<>();
+		lettere = new ArrayList<>();
 	}
 	
+	//clone constructor
+	public Anagramma(Anagramma other) {
+		this.lettere = new ArrayList<>(other.lettere);
+	}
+	
+	public Anagramma(String string) {
+		lettere = new ArrayList<>();
+		for(int i=0; i<string.length(); i++) 
+			this.lettere.add(string.charAt(i));
+	}
+
 	public void add(char c) {
 		lettere.add(c);
 	}
@@ -38,6 +49,7 @@ public class Anagramma {
 		lettere.remove(lettere.size()-1);
 		
 	}
+
 	
 	
 

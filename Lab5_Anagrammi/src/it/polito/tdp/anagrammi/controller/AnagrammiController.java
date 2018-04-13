@@ -7,6 +7,7 @@ package it.polito.tdp.anagrammi.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.anagrammi.db.AnagrammaDAO;
 import it.polito.tdp.anagrammi.model.Anagramma;
 import it.polito.tdp.anagrammi.model.Model;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextField;
 public class AnagrammiController {
 
 	private Model model;
+	private AnagrammaDAO anDao = new AnagrammaDAO();
 	
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -37,8 +39,12 @@ public class AnagrammiController {
     void handleCalcola(ActionEvent event) {
     	txtCorr.clear();
     	txtErr.clear();
-    	for(Anagramma a : model.getAnagrammi(txtLog.getText())) 
-    		txtCorr.appendText(a.toString());
+    	for(Anagramma a : model.getAnagrammi(txtLog.getText())) { 
+    		if(anDao.isCorrect(a))
+    			txtCorr.appendText(a.toString()+"\n");
+    		else
+    			txtErr.appendText(a.toString()+"\n");
+    	}
     }
 
     @FXML
