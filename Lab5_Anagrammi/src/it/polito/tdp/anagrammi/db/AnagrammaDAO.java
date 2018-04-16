@@ -13,7 +13,8 @@ public class AnagrammaDAO {
 public boolean isCorrect(Anagramma a) {
 		
 		String sql = "SELECT nome " + 
-				"FROM parola";
+				"FROM parola " +
+				"WHERE nome=?" ;
 		
 		try {
 			
@@ -21,12 +22,12 @@ public boolean isCorrect(Anagramma a) {
 			
 			PreparedStatement st = conn.prepareStatement(sql);
 			
+			st.setString(1, a.toString());
+			
 			ResultSet res = st.executeQuery();
 			
-			while(res.next()) {
-				String curr = res.getString("nome");
-				if(curr.compareTo(a.toString())==0)
-					return true;
+			if(res.next()) {
+				return true;
 			}
 			
 			conn.close();

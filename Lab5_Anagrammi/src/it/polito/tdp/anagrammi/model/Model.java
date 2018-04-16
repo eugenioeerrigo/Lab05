@@ -2,14 +2,17 @@ package it.polito.tdp.anagrammi.model;
 
 import java.util.*;
 
-public class Model {
+import it.polito.tdp.anagrammi.db.AnagrammaDAO;
 
-	private List<Anagramma> soluzione;
+public class Model {
 	
-	public List<Anagramma> getAnagrammi(String parola) {
+	private AnagrammaDAO anDao;
+	private Set<Anagramma> soluzione;
+	
+	public Set<Anagramma> getAnagrammi(String parola) {
 		
 		int livello = 0;
-		soluzione = new ArrayList<>();
+		soluzione = new HashSet<Anagramma>();
 		
 		Anagramma a = new Anagramma(parola);
 		
@@ -32,7 +35,8 @@ public class Model {
 		}
 	
 		for(int i=0; i<a.getLettere().size(); i++) {
-			if(!a1.getLettere().contains(a.get(i))) {
+			//if(!a1.getLettere().contains(a.get(i))) {                        //FUNZIONA SOLO SE a NON CONTIENE 2 LETTERE UGUALI
+			if(charCounter(a1, a.get(i)) < charCounter(a, a.get(i))) {         //FUNZIONA MA MI RIPETE PIU' VOLTE LE PAROLE ANAGRAMMATE SE HO 2 LETTERE UGUALI
 			a1.add(a.get(i)); 
 			ricorsiva(a, a1, livello+1);
 			a1.removeLast();
@@ -40,7 +44,22 @@ public class Model {
 		}
 		
 	}
-	
 
+	public boolean isCorrect(Anagramma a) {
+		anDao = new AnagrammaDAO();
+		return anDao.isCorrect(a);
+	}
+	
+	private static int charCounter(Anagramma a, char c){
+		int count = 0;
+	    for (int i=0; i < a.getLettere().size(); i++)
+	    {
+	        if (a.get(i) == c)
+	        {
+	             count++;
+	        }
+	    }
+	    return count;
+	}
 	
 }

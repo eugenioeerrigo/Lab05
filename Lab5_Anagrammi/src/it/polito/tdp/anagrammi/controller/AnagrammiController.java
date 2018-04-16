@@ -18,7 +18,6 @@ import javafx.scene.control.TextField;
 public class AnagrammiController {
 
 	private Model model;
-	private AnagrammaDAO anDao = new AnagrammaDAO();
 	
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -40,7 +39,7 @@ public class AnagrammiController {
     	txtCorr.clear();
     	txtErr.clear();
     	for(Anagramma a : model.getAnagrammi(txtLog.getText())) { 
-    		if(anDao.isCorrect(a))
+    		if(model.isCorrect(a))
     			txtCorr.appendText(a.toString()+"\n");
     		else
     			txtErr.appendText(a.toString()+"\n");
